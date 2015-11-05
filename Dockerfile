@@ -17,7 +17,12 @@ RUN apt-get install -y \
         libxslt1-dev \
         git \
         awscli \
-        docker
+        docker.io
+        
+RUN ln -sf /usr/bin/docker.io /usr/local/bin/docker
+RUN sed -i '$acomplete -F _docker docker' /etc/bash_completion.d/docker.io
+RUN update-rc.d docker.io defaults
+
 
 # Cleanup Apt
 RUN apt-get clean
